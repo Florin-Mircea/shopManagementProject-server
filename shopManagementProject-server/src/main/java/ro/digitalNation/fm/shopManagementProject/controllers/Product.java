@@ -1,4 +1,4 @@
-package ro.digitalNation.fm.shopManagementProject.beans;
+package ro.digitalNation.fm.shopManagementProject.controllers;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -12,6 +12,7 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import ro.digitalNation.fm.shopManagementProject.beans.*;
 
 @Bean
 @Entity
@@ -57,6 +58,10 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    Product(int i, String productName, String series, double price) {
+        
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -84,6 +89,10 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "Product{" + "productName=" + productName + ", series=" + series + ", price=" + price + '}';
+    }
+
+    void getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
 }

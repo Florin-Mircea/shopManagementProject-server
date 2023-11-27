@@ -1,5 +1,6 @@
-package ro.digitalNation.fm.shopManagementProject.beans;
+package ro.digitalNation.fm.shopManagementProject.controllers;
 
+import ro.digitalNation.fm.shopManagementProject.beans.*;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,6 +55,10 @@ public class Invoice implements Serializable {
         this.invoiceLine = invoiceLine;
     }
 
+    Invoice(int i, String series, Integer number, Integer invoiceLine) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getSeries() {
         return series;
     }
@@ -82,5 +87,9 @@ public class Invoice implements Serializable {
     public String toString() {
         return "Invoice{" + "series=" + series + ", number=" + number + ", invoiceLine=" + invoiceLine + '}';
     }    
+
+    void getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

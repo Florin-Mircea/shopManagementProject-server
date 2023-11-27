@@ -1,7 +1,37 @@
 package ro.digitalNation.fm.shopManagementProject.beans;
 
-public class InvoiceLine {
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+
+@Bean
+@Entity
+@Table(name = "invoicelines", catalog = "shopmanagementproject", schema = "")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "invoicelines.findAll", query = "SELECT ic FROM invoicelines ic"),
+    @NamedQuery(name = "invoicelines.findById", query = "SELECT ic FROM invoicelines ic WHERE ic.id = :id")})
+public class InvoiceLine implements Serializable {
     
+     private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "productName", nullable = false, length = 65535)
     private String productName;
     private Integer quantity;
     private double price;

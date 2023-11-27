@@ -1,5 +1,6 @@
 package ro.digitalNation.restuflWebService;
 
+import ro.digitalNation.restuflWebService.dbbeans.Person;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;

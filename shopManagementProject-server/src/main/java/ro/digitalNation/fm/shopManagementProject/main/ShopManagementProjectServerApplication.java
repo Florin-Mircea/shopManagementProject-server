@@ -1,9 +1,11 @@
 package ro.digitalNation.fm.shopManagementProject.main;
 
 import java.util.Arrays;
+import static oracle.net.aso.b.i;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import ro.digitalNation.fm.shopManagementProject.controllers.MainController;
 
 //@SPRING_BOOT_APPLICATION
 @SpringBootApplication
@@ -33,6 +35,14 @@ public class ShopManagementProjectServerApplication {
                     };
                 }
                 
+            MainController mainController = new MainController();
+            mainController.getUsers(args);
+            mainController.addUser(u);
+            mainController.getProducts(args);
+            mainController.addProduct(p);            
+            mainController.getInvoices(args);
+            mainController.addInvoice(i);
+            
             } catch(Exception ex) {
                 System.out.println("Exception");
             }
