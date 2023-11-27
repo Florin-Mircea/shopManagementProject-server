@@ -1,4 +1,4 @@
-package ro.digitalNation.fm.shopManagementProject.config;
+package ro.digitalNation.restuflWebService.controllers;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -7,9 +7,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ProjectConfigIT {
+public class RushJpaControllerIT {
     
-    public ProjectConfigIT() {
+    public RushJpaControllerIT() {
         
     }
     
@@ -32,14 +32,9 @@ public class ProjectConfigIT {
     public void tearDown() {
         
     }
-    
+
     @Test
-    public void testWsExporter() {
-        System.out.println("wsExporter");
-        ProjectConfig instance = new ProjectConfig();
-        SimpleJaxWsServiceExporter expResult = null;
-        SimpleJaxWsServiceExporter result = instance.wsExporter();
-        assertEquals(expResult, result);
+    public void testSomeMethod() {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

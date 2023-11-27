@@ -18,8 +18,8 @@ import java.io.Serializable;
 @Table(name = "invoicelines", catalog = "shopmanagementproject", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "invoicelines.findAll", query = "SELECT ic FROM invoicelines ic"),
-    @NamedQuery(name = "invoicelines.findById", query = "SELECT ic FROM invoicelines ic WHERE ic.id = :id")})
+    @NamedQuery(name = "invoicelines.findAll", query = "SELECT il FROM invoicelines il"),
+    @NamedQuery(name = "invoicelines.findById", query = "SELECT il FROM invoicelines il WHERE il.id = :id")})
 public class InvoiceLine implements Serializable {
     
      private static final long serialVersionUID = 1L;
@@ -33,7 +33,13 @@ public class InvoiceLine implements Serializable {
     @Lob
     @Column(name = "productName", nullable = false, length = 65535)
     private String productName;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "quantity", nullable = false, length = 65535)
     private Integer quantity;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "price", nullable = false, length = 65535)
     private double price;
 
     public InvoiceLine() {
@@ -58,6 +64,14 @@ public class InvoiceLine implements Serializable {
         this.price = price;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+        
     public String getProductName() {
         return productName;
     }

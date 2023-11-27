@@ -43,7 +43,7 @@ public class Course implements Activity {
         public String getResponsabilities() {            
             return null;            
         }
-    };  
+    };          
 
     public Course(Integer id) {
         this.id = id;
@@ -58,5 +58,69 @@ public class Course implements Activity {
     public String getDuration() {        
         return null;        
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Explorer getExplorer() {
+        return explorer;
+    }
+
+    public void setExplorer(Explorer explorer) {
+        this.explorer = explorer;
+    }
+
+    public Trainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
+    }
+
+    public ArrayList<Explorer> getExplorers() {
+        return explorers;
+    }
+
+    public void setExplorers(ArrayList<Explorer> explorers) {
+        this.explorers = explorers;
+    }
+
+    public ArrayList<Trainer> getTrainers() {
+        return trainers;
+    }
+
+    public void setTrainers(ArrayList<Trainer> trainers) {
+        this.trainers = trainers;
+    }
+
+    public ArrayList<Activ> getActivs() {
+        return activs;
+    }
+
+    public void setActivs(ArrayList<Activ> activs) {
+        this.activs = activs;
+    }
+
+    public HashMap<String, String> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(HashMap<String, String> activities) {
+        this.activities = activities;
+    }
+
+    public Person getP() {
+        return p;
+    }
+
+    public void setP(Person p) {
+        this.p = p;
+    }        
     
 }

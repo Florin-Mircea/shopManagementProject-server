@@ -30,11 +30,11 @@ public class Workout implements Activity {
     private Integer id;
     @Basic(optional = false)
     @Lob
-    @Column(name = "firstName", nullable = false, length = 65535)
+    @Column(name = "activOne", nullable = false, length = 65535)
     private String activOne;
     @Basic(optional = false)
     @Lob
-    @Column(name = "firstName", nullable = false, length = 65535)
+    @Column(name = "activTwo", nullable = false, length = 65535)
     private String activTwo;
 
     public Workout() {

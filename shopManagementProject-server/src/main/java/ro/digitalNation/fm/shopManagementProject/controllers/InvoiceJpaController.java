@@ -9,7 +9,8 @@ import jakarta.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
 
-public class InvoiceJpaController implements Serializable {
+@Controller
+public class InvoiceJpaController {
     
     public InvoiceJpaController(EntityManagerFactory emf) {
         this.emf = emf;

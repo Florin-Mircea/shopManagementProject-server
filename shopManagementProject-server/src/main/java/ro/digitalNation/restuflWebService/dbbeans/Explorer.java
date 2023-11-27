@@ -18,7 +18,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "explorers.findAll", query = "SELECT e FROM explorers e"),
-    @NamedQuery(name = "explorers.findById", query = "SELECT e FROM explorers p WHERE e.id = :id")})
+    @NamedQuery(name = "explorers.findById", query = "SELECT e FROM explorers e WHERE e.id = :id")})
 public class Explorer extends Person {
     
     private static final long serialVersionUID = 1L;
@@ -40,6 +40,14 @@ public class Explorer extends Person {
     public Explorer(String explorer) {
         this.explorer = explorer;
     }        
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }    
     
     @Override
     public String getResponsabilities() {        

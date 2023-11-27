@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 import javax.sound.midi.Track;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import ro.digitalNation.fm.shopManagementProject.beans.User;
 import ro.digitalNation.fm.shopManagementProject.controllers.MainController;
 import ro.digitalNation.fm.shopManagementProject.controllers.Person;
@@ -30,14 +32,18 @@ public class TrackController {
     private EntityManagerFactory emf;
     private TrainerJpaController trainerController;    
     private ExplorerJpaController explorerController;
+    private RushJpaController rushController;
     
     private TrackController() {
         emf = Persistence.createEntityManagerFactory("trackdbPU");
         trainerController = new TrainerJpaController(emf);
         explorerController = new ExplorerJpaController(emf);
+        rushController = new RushJpaController(emf);
     }
     
     Trainer trainer = new Trainer();
+    Explorer explorer = new Explorer();
+    
     Person person = new Person() {
         @Override
         public String getResponsabilities() {
@@ -55,9 +61,9 @@ public class TrackController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     
-    Track track = new Track();
+    //Track track = new Track();
     Course course = new Course();    
-                                
+    Rush rush = new Rush();                   
     
     public Track track(@PathVariable(value = "name", defaultValue = "World") String name) {
         return new Track(counter.incrementAndGet(), String.format(template, name));
@@ -136,12 +142,8 @@ public class TrackController {
     @GetMapping("/")
     public Trainer getTrackCourseTrainer() {
         return course.trainer;        
-    }
+    }    
     
-    /**
-     *
-     * @return
-     */
     @GetMapping("/")
     public ArrayList<Activ> getActivsCourse() {
         return course.activs;
@@ -157,6 +159,7 @@ public class TrackController {
      *
      * @param t
      */
+    
     @PostMapping("/addTrainer")
     public void addTrainer(@ModelAttribute Trainer t, Model model) {       
         //model.Attribute("t", t);
@@ -168,7 +171,7 @@ public class TrackController {
      * @param e
      */
     @PostMapping("/addExplorer")
-    public void addExplorer(@ModelAttribute Explorer e) {        
+    public void addExplorer(@ModelAttribute Explorer e, Model model) {        
         explorerController.create(new Explorer(e.getId(), e.getFirstName(), e.getLastName(), e.getCity(), e.getAge(), e.isMarried(), e.getCost(), e.getExplorer(), e.getTrainer()));
     }
     

@@ -1,4 +1,4 @@
-package ro.digitalNation.fm.shopManagementProject.controllers;
+package ro.digitalNation.restuflWebService.controllers;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -6,14 +6,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import java.io.Serializable;
 import java.util.List;
-import org.h2.engine.User;
 
 @Controller
-public class ProductJpaController {
+public class RushJpaController {
     
-    public ProductJpaController(EntityManagerFactory emf) {
+    public RushJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
@@ -23,12 +21,12 @@ public class ProductJpaController {
         return emf.createEntityManager();
     }
 
-    public void create(Product product) {
+    public void create(Rush rush) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(product);
+            em.persist(rush);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -37,19 +35,42 @@ public class ProductJpaController {
         }
     }
     
+    public void edit(Rush rush) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            trainer = em.merge(rush);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = rush.getId();
+                if (findRush(id) == null) {
+                    //return null;
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public void destroy(Integer id) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Product product = null;
+            Rush rush = null;
             try {
-                product = em.getReference(Product.class, id);
-                product.getId();
+                rush = em.getReference(Rush.class, id);
+                rush.getId();
             } catch (EntityNotFoundException enfe) {
                 
             }
-            em.remove(product);
+            em.remove(rush);
             em.getTransaction().commit();
  
         } finally {
@@ -59,19 +80,11 @@ public class ProductJpaController {
         }
     }
     
-    public List<Product> findProductEntities(boolean par, int par1, int par2) {
-        return findProductEntities(true, -1, -1);
-    }
-
-    public List<Product> findProductEntities(int maxResults, int firstResult) {
-        return findProductEntities(false, maxResults, firstResult);
-    }
-
-    private List<Product> findProductEntities(boolean all, int maxResults, int firstResult) {
+    private List<Rush> findRushEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Product.class));
+            cq.select(cq.from(Rush.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -82,21 +95,21 @@ public class ProductJpaController {
             em.close();
         }
     }
-    
-    public Product findProduct(Integer id) {
+
+    public Rush findRush(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Product.class, id);
+            return em.find(Rush.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getProductCount() {
+    public int getRushCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Product> rt = cq.from(Product.class);
+            Root<Rush> rt = cq.from(Rush.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -104,14 +117,9 @@ public class ProductJpaController {
             em.close();
         }
     }
-    
-    List<Product> findProductEntities() {
-        return null;        
-    }
 
-    /*
-    private Object findProduct(Integer id) {
-        return null;        
+    List<Rush> findRushEntities() {
+        return null;
+        
     }
-    */
 }

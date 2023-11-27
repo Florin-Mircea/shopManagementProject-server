@@ -37,6 +37,9 @@ public class Product implements Serializable {
     @Lob
     @Column(name = "series", nullable = false, length = 65535)
     private String series;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "price", nullable = false, length = 65535)
     private double price;
 
     public Product() {
@@ -56,6 +59,21 @@ public class Product implements Serializable {
         this.series = series;
         this.price = price;
     }
+
+    public Product(Integer id, String productName, String series, double price) {
+        this.id = id;
+        this.productName = productName;
+        this.series = series;
+        this.price = price;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }        
 
     public String getProductName() {
         return productName;

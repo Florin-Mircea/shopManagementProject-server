@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -27,8 +28,13 @@ public class Rush implements Activity {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "activOne", nullable = false, length = 65535)
     private String activOne;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "activTwo", nullable = false, length = 65535)
     private String activTwo; 
 
     public Rush() {

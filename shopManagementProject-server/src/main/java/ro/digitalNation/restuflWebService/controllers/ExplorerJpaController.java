@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import java.util.List;
 
+@Controller
 public class ExplorerJpaController {
     
     public ExplorerJpaController(EntityManagerFactory emf) {

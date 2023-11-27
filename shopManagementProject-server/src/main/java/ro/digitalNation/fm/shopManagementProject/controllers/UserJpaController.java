@@ -8,11 +8,13 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
+import org.h2.engine.User;
 //import org.h2.engine.User;
 import ro.digitalNation.fm.shopManagementProject.beans.User;
 import ro.digitalNation.fm.shopManagementProject.beans.Person;
 
-public class UserJpaController implements Serializable {
+@Controller
+public class UserJpaController {
     
     User user = new User();
     
@@ -136,20 +138,10 @@ public class UserJpaController implements Serializable {
         } finally {
             em.close();
         }
-    }
-    /*
-    List<User> findUserEntities() {
-        return null;
-        
-    }
-    */
-    /*
-    private Object findUser(Integer id) {
-        return null;        
-    }
-    */
+    }    
 
-    void edit(ro.digitalNation.fm.shopManagementProject.beans.User user) {
-        
+    void edit(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

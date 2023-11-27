@@ -15,11 +15,11 @@ import java.io.Serializable;
 
 @Bean
 @Entity
-@Table(name = "invlices", catalog = "shopmanagementproject", schema = "")
+@Table(name = "invoices", catalog = "shopmanagementproject", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "clients.findAll", query = "SELECT c FROM clients c"),
-    @NamedQuery(name = "clients.findById", query = "SELECT c FROM clients p WHERE c.id = :id")})
+    @NamedQuery(name = "invoices.findAll", query = "SELECT i FROM invoices i"),
+    @NamedQuery(name = "invoices.findById", query = "SELECT i FROM invoices i WHERE i.id = :id")})
 public class Invoice implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -33,7 +33,13 @@ public class Invoice implements Serializable {
     @Lob
     @Column(name = "series", nullable = false, length = 65535)
     private String series;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "number", nullable = false, length = 65535)
     private Integer number;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "invoiceLine", nullable = false, length = 65535)
     private Integer invoiceLine;
 
     public Invoice() {
@@ -53,6 +59,21 @@ public class Invoice implements Serializable {
         this.number = number;
         this.invoiceLine = invoiceLine;
     }
+
+    public Invoice(Integer id, String series, Integer number, Integer invoiceLine) {
+        this.id = id;
+        this.series = series;
+        this.number = number;
+        this.invoiceLine = invoiceLine;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }        
 
     public String getSeries() {
         return series;

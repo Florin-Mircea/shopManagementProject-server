@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.h2.engine.User;
 
-
+@Controller
 public class PersonJpaController {
     
     public PersonJpaController(EntityManagerFactory emf) {

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -28,7 +29,9 @@ public class Message implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "code", nullable = false, length = 65535)
     private int code;
 
     public Message() {
@@ -38,6 +41,19 @@ public class Message implements Serializable {
     public Message(int code) {
         this.code = code;
     }
+
+    public Message(Integer id, int code) {
+        this.id = id;
+        this.code = code;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }        
 
     public int getCode() {
         return code;

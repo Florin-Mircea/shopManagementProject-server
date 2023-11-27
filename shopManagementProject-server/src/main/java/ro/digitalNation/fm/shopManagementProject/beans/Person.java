@@ -1,6 +1,5 @@
 package ro.digitalNation.fm.shopManagementProject.beans;
 
-import ro.digitalNation.restuflWebService.*;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,8 +41,17 @@ public abstract class Person implements Serializable {
     @Lob
     @Column(name = "city", nullable = false, length = 65535)
     private String city;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "age", nullable = false, length = 65535)
     private Integer age;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "married", nullable = false, length = 65535)
     private boolean married;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "cost", nullable = false, length = 65535)
     private Integer cost;
     @Basic(optional = false)
     @Lob
@@ -80,13 +88,21 @@ public abstract class Person implements Serializable {
         this.explorer = explorer;
         this.trainer = trainer;
     }        
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }        
     
     public String getIdentifier() {
-		return firstName.toLowerCase().replaceAll(" ", "").replaceAll("-", "") + "_" + lastName.toUpperCase().replaceAll(" ", "").replaceAll("-", "") ;
+	return firstName.toLowerCase().replaceAll(" ", "").replaceAll("-", "") + "_" + lastName.toUpperCase().replaceAll(" ", "").replaceAll("-", "") ;
 	}
     
     public String getIdentifier(String explorer, String florin, String mircea) {
-            return explorer.toLowerCase().replaceAll(" ", "").replaceAll("-", "") + "_" + firstName.toLowerCase().replaceAll(" ", "").replaceAll("-", "") + "_" + lastName.toUpperCase().replaceAll(" ", "").replaceAll("-", "") ;
+        return explorer.toLowerCase().replaceAll(" ", "").replaceAll("-", "") + "_" + firstName.toLowerCase().replaceAll(" ", "").replaceAll("-", "") + "_" + lastName.toUpperCase().replaceAll(" ", "").replaceAll("-", "") ;
         }
 	
     public abstract String getResponsabilities(); 
@@ -158,10 +174,6 @@ public abstract class Person implements Serializable {
     @Override
     public String toString() {
         return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", age=" + age + ", married=" + married + ", cost=" + cost + ", explorer=" + explorer + ", trainer=" + trainer + '}';
-    }        
-
-    public Integer getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }           
     
 }

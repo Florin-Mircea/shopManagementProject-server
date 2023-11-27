@@ -1,21 +1,53 @@
 package ro.digitalNation.restuflWebService.controllers;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import ro.digitalNation.restuflWebService.dbbeans.*;
 import java.util.ArrayList;
 
 @Bean
-public class Track {
+@Entity
+@Table(name = "tracks", catalog = "trackdb", schema = "")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "tracks.findAll", query = "SELECT tr FROM tracks tr"),
+    @NamedQuery(name = "tracks.findById", query = "SELECT tr FROM tracks t WHERE tr.id = :id")})
+public class Track implements Serializable {
         
-        private String trainer;
-        private String explorer;
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "trainer", nullable = false, length = 65535)
+    private String trainer;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "explorer", nullable = false, length = 65535)
+    private String explorer;
+    
         Course course = new Course();
         Explorer explorer = new Explorer();
         Trainer trainer = new Trainer();
         Activ activ = new Activ();
         
         ArrayList<Course> courses = new ArrayList<Course>();
-        private ArrayList<Explorer> explorers = new ArrayList<Explorer>();
-        private ArrayList<Trainer> trainers = new ArrayList<Trainer>();
+        //private ArrayList<Explorer> explorers = new ArrayList<Explorer>();
+        //private ArrayList<Trainer> trainers = new ArrayList<Trainer>();
         ArrayList<Activ> activities = new ArrayList<Activ>();
         
         

@@ -36,6 +36,7 @@ public class ShopManagementProjectServerApplication {
                 }
                 
             MainController mainController = new MainController();
+            
             mainController.getUsers(args);
             mainController.addUser(u);
             mainController.getProducts(args);

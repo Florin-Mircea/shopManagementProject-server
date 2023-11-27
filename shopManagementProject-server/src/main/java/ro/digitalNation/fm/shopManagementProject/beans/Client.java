@@ -56,6 +56,21 @@ public class Client implements Serializable {
         this.cnp = cnp;
     }
 
+    public Client(Integer id, String firstName, String lastName, String cnp) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cnp = cnp;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+        
     public String getFirstName() {
         return firstName;
     }
