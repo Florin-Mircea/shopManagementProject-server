@@ -28,28 +28,30 @@ public class MainController {
     
     private EntityManagerFactory emf;
     private UserJpaController userController;   
+    private PersonJpaController personController;
     private ProductJpaController productController;
     private InvoiceJpaController invoiceController;
     
     public MainController() {
         emf = Persistence.createEntityManagerFactory("shopmanagementprojectPU");
         userController = new UserJpaController(emf);
+        personController = new PersonJpaController(emf);
         productController = new ProductJpaController(emf);
         invoiceController = new InvoiceJpaController(emf);
     }
     
     User user = new User();
-    Product product = new Product();
-    Invoice invoice = new Invoice();
-    
     Person person = new Person() {
         @Override
         public String getResponsabilities() {
             return null;            
         }
     };
+    Product product = new Product();
+    Invoice invoice = new Invoice();        
     
     ArrayList<User> users = new ArrayList<User>();    
+    ArrayList<Person> persons = new ArrayList<Person>();  
     ArrayList<Product> products = new ArrayList<Product>();
     ArrayList<Invoice> invoices = new ArrayList<Invoice>();
     
@@ -71,6 +73,31 @@ public class MainController {
     @PostMapping("/addUser")
     public void addUser(@ModelAttribute User u) {        
         userController.create(new User(0, u.getUserName(), u.getPassword()));
+    }
+    
+    @GetMapping("/")
+    public ArrayList<Person> getPersons(@RequestParam(name="firstName", required=false)) {        
+        List<Person> pers = personController.findPersonEntities();
+        ArrayList<Person> persons = new ArrayList<Person>();
+        pers.forEach((p) -> {
+            persons.add(new Person(p.getId(), p.getFirstName(), p.getLastName(), p.getCity(), p.getAge(), p.isMarried(), p.getCost(), p.getExplorer(), p.getTrainer()) {
+                @Override
+                public String getResponsabilities() {
+                    return null;                    
+                }
+            });
+        });
+        return persons;
+    }
+    
+    @PostMapping("/addPerson")
+    public void addPerson(@ModelAttribute Person p) {        
+        personController.create(new Person(p.getId(), p.getFirstName(), p.getLastName(), p.getCity(), p.getAge(), p.isMarried(), p.getCost(), p.getExplorer(), p.getTrainer()) {
+            @Override
+            public String getResponsabilities() {
+                return null;                
+            }
+        });
     }
     
     @GetMapping("/")
@@ -143,5 +170,5 @@ public class MainController {
     private final transient PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport(this);
     public static final String PROP_USER = "user";
 
-    
+        
 }

@@ -14,7 +14,7 @@ import ro.digitalNation.fm.shopManagementProject.beans.User;
 import ro.digitalNation.fm.shopManagementProject.beans.Person;
 
 @Controller
-public class UserJpaController {
+public class UserJpaController implements Serializable {
     
     User user = new User();
     
@@ -82,7 +82,7 @@ public class UserJpaController {
                 user = em.getReference(User.class, id);
                 user.getId();
             } catch (EntityNotFoundException enfe) {
-                
+                enfe.printStackTrace();
             }
             em.remove(user);
             em.getTransaction().commit();
@@ -102,7 +102,7 @@ public class UserJpaController {
         return findUserEntities(false, maxResults, firstResult);
     }
 
-    private List<User> findUserEntities(boolean all, int maxResults, int firstResult) {
+    public List<User> findUserEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -138,10 +138,6 @@ public class UserJpaController {
         } finally {
             em.close();
         }
-    }    
-
-    void edit(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }        
     
 }

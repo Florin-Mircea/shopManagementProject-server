@@ -19,7 +19,10 @@ import java.awt.event.ActionListener;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "trainers.findAll", query = "SELECT t FROM trainers t"),
-    @NamedQuery(name = "trainers.findById", query = "SELECT t FROM trainers t WHERE t.id = :id")})
+    @NamedQuery(name = "trainers.findById", query = "SELECT t FROM trainers t WHERE t.id = :id"),
+    @NamedQuery(name = "trainers.addTrainer", query = "INSERT INTO `trackdb`.`trainers` (`id`, `trainer`) VALUES ('', '')"),
+    @NamedQuery(name = "trainers.updateTrainer", query = "UPDATE trainers SET id = `id`, trainer = `trainer` WHERE id = `id`, trainer = `trainer`"),
+    @NamedQuery(name = "invoices.deleteTrainer", query = "DELETE FROM trainers WHERE id = `id`")})
 public class Trainer extends Person {
     
     private static final long serialVersionUID = 1L;

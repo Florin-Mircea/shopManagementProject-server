@@ -19,7 +19,10 @@ import java.io.Serializable;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "clients.findAll", query = "SELECT c FROM clients c"),
-    @NamedQuery(name = "clients.findById", query = "SELECT c FROM clients p WHERE c.id = :id")})
+    @NamedQuery(name = "clients.findById", query = "SELECT c FROM clients p WHERE c.id = :id"),
+    @NamedQuery(name = "clients.addClient", query = "INSERT INTO `shopmanagementproject`.`clients` (`id`, `firstName`, `lastName`, `cnp`) VALUES ('', '', '', '')"),
+    @NamedQuery(name = "clients.updateClient", query = "UPDATE clients SET id = `id`, firstName = `firstName`, lastName = `lastName`, cnp = `cnp` WHERE id = `id`, firstName = `firstName`, lastName = `lastName`, cnp = `cnp`"),
+    @NamedQuery(name = "clients.deleteClient", query = "DELETE FROM clients WHERE id = `id`")})
 public class Client implements Serializable {
     
     private static final long serialVersionUID = 1L;

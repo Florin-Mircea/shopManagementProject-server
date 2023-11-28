@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Controller
-public class InvoiceJpaController {
+public class InvoiceJpaController implements Serializable {
     
     public InvoiceJpaController(EntityManagerFactory emf) {
         this.emf = emf;

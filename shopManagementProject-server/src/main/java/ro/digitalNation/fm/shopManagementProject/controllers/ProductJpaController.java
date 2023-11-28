@@ -11,7 +11,7 @@ import java.util.List;
 import org.h2.engine.User;
 
 @Controller
-public class ProductJpaController {
+public class ProductJpaController implements Serializable {
     
     public ProductJpaController(EntityManagerFactory emf) {
         this.emf = emf;

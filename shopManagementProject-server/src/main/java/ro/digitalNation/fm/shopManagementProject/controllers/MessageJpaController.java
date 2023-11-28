@@ -6,11 +6,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import java.io.Serializable;
 import java.util.List;
 import oracle.jdbc.driver.Message;
 import ro.digitalNation.fm.shopManagementProject.beans.User;
 
-public class MessageJpaController {
+public class MessageJpaController implements Serializable {
     
     Message message = new Message() {
         @Override

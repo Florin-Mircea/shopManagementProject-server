@@ -18,7 +18,10 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "rushes.findAll", query = "SELECT r FROM rushes r"),
-    @NamedQuery(name = "rushes.findById", query = "SELECT r FROM materials r WHERE r.id = :id")})
+    @NamedQuery(name = "rushes.findById", query = "SELECT r FROM materials r WHERE r.id = :id"),
+    @NamedQuery(name = "rushes.addRush", query = "INSERT INTO `trackdb`.`rushes` (`id`, `activOne`, `activTwo`) VALUES ('', '', '')"),
+    @NamedQuery(name = "rushes.updateRush", query = "UPDATE rushes SET id = `id`, activOne = `activOne`, activTwo = `activTwo` WHERE id = `id`, activOne = `activOne`, activTwo = `activTwo`"),
+    @NamedQuery(name = "rushes.deleteRush", query = "DELETE FROM rushes WHERE id = `id`")})
 public class Rush implements Activity {
     
     private static final long serialVersionUID = 1L;

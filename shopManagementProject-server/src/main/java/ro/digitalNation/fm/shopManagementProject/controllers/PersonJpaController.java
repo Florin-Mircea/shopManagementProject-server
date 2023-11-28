@@ -11,7 +11,7 @@ import java.util.List;
 import org.h2.engine.User;
 
 @Controller
-public class PersonJpaController {
+public class PersonJpaController implements Serializable {
     
     public PersonJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -133,4 +133,8 @@ public class PersonJpaController {
         return null;        
     }
     */
+
+    List<Person> findPersonEntities() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

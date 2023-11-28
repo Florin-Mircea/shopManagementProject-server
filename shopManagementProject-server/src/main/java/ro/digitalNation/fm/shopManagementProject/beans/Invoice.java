@@ -19,7 +19,10 @@ import java.io.Serializable;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "invoices.findAll", query = "SELECT i FROM invoices i"),
-    @NamedQuery(name = "invoices.findById", query = "SELECT i FROM invoices i WHERE i.id = :id")})
+    @NamedQuery(name = "invoices.findById", query = "SELECT i FROM invoices i WHERE i.id = :id"),
+    @NamedQuery(name = "invoices.addInvoice", query = "INSERT INTO `shopmanagementproject`.`invoices` (`id`, `series`, `number`, `invoiceLine`) VALUES ('', '', '', '')"),
+    @NamedQuery(name = "invoices.updateInvoice", query = "UPDATE invoices SET id = `id`, series = `series`, number = `number`, invoiceLine = `invoiceLine` WHERE id = `id`, series = `series`, number = `number`, invoiceLine = `invoiceLine`"),
+    @NamedQuery(name = "invoices.deleteInvoice", query = "DELETE FROM invoices WHERE id = `id`")})
 public class Invoice implements Serializable {
     
     private static final long serialVersionUID = 1L;

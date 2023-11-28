@@ -19,7 +19,10 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "explorers.findAll", query = "SELECT e FROM explorers e"),
-    @NamedQuery(name = "explorers.findById", query = "SELECT e FROM explorers p WHERE e.id = :id")})
+    @NamedQuery(name = "explorers.findById", query = "SELECT e FROM explorers p WHERE e.id = :id"),
+    @NamedQuery(name = "explorers.addExplorer", query = "INSERT INTO `trackdb`.`explorers` (`id`, `explorer`) VALUES ('', '')"),
+    @NamedQuery(name = "trainers.updateExplorer", query = "UPDATE explorers SET id = `id`, explorer = `explorer` WHERE id = `id`, explorer = `explorer`"),
+    @NamedQuery(name = "invoices.deleteExplorer", query = "DELETE FROM explorers WHERE id = `id`")})
 public class Explorer extends Person {
     
     private static final long serialVersionUID = 1L;

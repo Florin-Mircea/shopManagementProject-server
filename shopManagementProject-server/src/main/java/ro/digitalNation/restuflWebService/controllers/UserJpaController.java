@@ -8,13 +8,29 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
+import ro.digitalNation.fm.shopManagementProject.beans.Person;
+import ro.digitalNation.fm.shopManagementProject.beans.User;
+
+/**
+ *
+ * @author FM
+ */
 
 @Controller
-public class TrainerJpaController implements Serializable, TrainerController {
-
+public class UserJpaController implements Serializable, UserController  {
+    
     private static final long serialVersionUID = 1L;
     
-    public TrainerJpaController(EntityManagerFactory emf) {
+    User user = new User();
+    
+    Person person = new Person() {
+        @Override
+        public String getResponsabilities() {
+            return null;            
+        }
+    };
+    
+    public UserJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
@@ -24,12 +40,12 @@ public class TrainerJpaController implements Serializable, TrainerController {
         return emf.createEntityManager();
     }
 
-    public void create(Trainer trainer) {
+    public void create(User user) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(trainer);
+            em.persist(user);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -38,19 +54,19 @@ public class TrainerJpaController implements Serializable, TrainerController {
         }
     }
     
-    public void edit(Trainer trainer) {
+    public void edit(User user) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            trainer = em.merge(trainer);
+            user = em.merge(user);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = trainer.getId();
-                if (findTrainer(id) == null) {
-                    //return null;
+                Integer id = user.getId();
+                if (findUser(id) == null) {
+                    
                 }
             }
             throw ex;
@@ -66,14 +82,14 @@ public class TrainerJpaController implements Serializable, TrainerController {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Trainer trainer = null;
+            User user = null;
             try {
-                trainer = em.getReference(Trainer.class, id);
-                trainer.getId();
+                user = em.getReference(User.class, id);
+                user.getId();
             } catch (EntityNotFoundException enfe) {
                 
             }
-            em.remove(trainer);
+            em.remove(user);
             em.getTransaction().commit();
  
         } finally {
@@ -82,29 +98,20 @@ public class TrainerJpaController implements Serializable, TrainerController {
             }
         }
     }
-    
-    /**
-     *
-     * @param par
-     * @param par1
-     * @param par2
-     * @return
-     */
-    @Override
-    public List<Trainer> findTrainerEntities(boolean par, int par1, int par2) {
-        return findTrainerEntities(true, -1, -1);
+
+    public List<User> findUserEntities() {
+        return findUserEntities(true, -1, -1);
     }
-    
-    
-    public List<Trainer> findTrainerEntities(int maxResults, int firstResult) {
-        return findTrainerEntities(false, maxResults, firstResult);
+
+    public List<User> findUserEntities(int maxResults, int firstResult) {
+        return findUserEntities(false, maxResults, firstResult);
     }
-    
-    public List<Trainer> findTrainerEntities(boolean all, int maxResults, int firstResult) {
+
+    private List<User> findUserEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Trainer.class));
+            cq.select(cq.from(User.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -116,31 +123,26 @@ public class TrainerJpaController implements Serializable, TrainerController {
         }
     }
 
-    public Trainer findTrainer(Integer id) {
+    public User findUser(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Trainer.class, id);
+            return em.find(User.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getTrainerCount() {
+    public int getUserCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Trainer> rt = cq.from(Trainer.class);
+            Root<User> rt = cq.from(User.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
-    }
-
-    @Override
-    public List<Trainer> findTrainerEntities() {
-        return null;        
-    }
+    }        
     
 }

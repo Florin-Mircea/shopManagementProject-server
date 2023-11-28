@@ -21,7 +21,10 @@ import java.io.Serializable;
 @NamedQueries({
     @NamedQuery(name = "persons.findAll", query = "SELECT p FROM persons p"),
     @NamedQuery(name = "persons.findById", query = "SELECT p FROM persons p WHERE p.id = :id"),
-    @NamedQuery(name = "persons.insertPerson", query = "INSERT INTO persons p")})
+    @NamedQuery(name = "persons.insertPerson", query = "INSERT INTO persons p"),
+    @NamedQuery(name = "persons.addPerson", query = "INSERT INTO `shopmanagementproject`.`persons` (`id`, `firstName`, `lastName`, `city`, `age`, `married`, `cost`, `explorer`, `trainer`) VALUES ('', '', '', '', '', '', '', '', '')"),
+    @NamedQuery(name = "persons.updatePerson", query = "UPDATE persons SET id = `id`, firstName = `firstName`, lastName = `lastName`, city = `city`, age = `age`, married = `married`, cost = `cost`, explorer = `explorer`, trainer = `trainer` WHERE id = `id`, firstName = `firstName`, lastName = `lastName`, city = `city`, age = `age`, married = `married`, cost = `cost`, explorer = `explorer`, trainer = `trainer`"),
+    @NamedQuery(name = "persons.deletePerson", query = "DELETE FROM persons WHERE id = `id`")})
 public abstract class Person implements Serializable {
     
     private static final long serialVersionUID = 1L;

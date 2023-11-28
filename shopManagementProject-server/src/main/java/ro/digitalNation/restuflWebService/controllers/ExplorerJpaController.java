@@ -6,10 +6,13 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import java.io.Serializable;
 import java.util.List;
 
 @Controller
-public class ExplorerJpaController {
+public class ExplorerJpaController implements Serializable, ExplorerController {
+
+    private static final long serialVersionUID = 1L;
     
     public ExplorerJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -79,17 +82,17 @@ public class ExplorerJpaController {
             }
         }
     }
-    /*
+    
     public List<Trainer> findTrainerEntities(boolean par, int par1, int par2) {
         return findTrainerEntities(true, -1, -1);
-    }
-    */
-    /*
+    }    
+    
     public List<Trainer> findTrainerEntities(int maxResults, int firstResult) {
         return findTrainerEntities(false, maxResults, firstResult);
     }
-    */
-    private List<Explorer> findExplorerEntities(boolean all, int maxResults, int firstResult) {
+    
+    @Override
+    public List<Explorer> findExplorerEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -105,6 +108,11 @@ public class ExplorerJpaController {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Explorer findExplorer(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -127,9 +135,15 @@ public class ExplorerJpaController {
         }
     }
 
-    List<Explorer> findExplorerEntities() {
+    @Override
+    public List<Explorer> findExplorerEntities() {
         return null;
         
+    }
+
+    @Override
+    public List<Explorer> findExplorerEntities(int maxResults, int firstResult) {
+        return null;        
     }
     
 }
