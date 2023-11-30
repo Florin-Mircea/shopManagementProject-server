@@ -161,5 +161,9 @@ public abstract class Person implements Serializable {
     public String toString() {
         return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", age=" + age + ", married=" + married + ", cost=" + cost + ", explorer=" + explorer + ", trainer=" + trainer + '}';
     }        
+
+    public Integer getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

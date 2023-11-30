@@ -11,6 +11,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @Bean
 @Entity
@@ -19,7 +20,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "workouts.findAll", query = "SELECT w FROM workouts w"),
     @NamedQuery(name = "workouts.findById", query = "SELECT w FROM workouts w WHERE w.id = :id")})
-public class Workout implements Activity {
+public class Workout implements Activity, Serializable {
     
     private static final long serialVersionUID = 1L;
     

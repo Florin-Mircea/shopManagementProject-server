@@ -13,6 +13,7 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 @Bean
 @Entity
@@ -24,7 +25,7 @@ import java.awt.event.ActionListener;
     @NamedQuery(name = "trainers.addTrainer", query = "INSERT INTO `trackdb`.`trainers` (`id`, `trainer`) VALUES ('', '')"),
     @NamedQuery(name = "trainers.updateTrainer", query = "UPDATE trainers SET id = `id`, trainer = `trainer` WHERE id = `id`, trainer = `trainer`"),
     @NamedQuery(name = "invoices.deleteTrainer", query = "DELETE FROM trainers WHERE id = `id`")})
-public class Trainer extends Person {
+public class Trainer extends Person implements Serializable {
     
     private static final long serialVersionUID = 1L;
     

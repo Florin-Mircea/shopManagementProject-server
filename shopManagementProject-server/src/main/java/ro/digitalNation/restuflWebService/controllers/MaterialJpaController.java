@@ -1,4 +1,4 @@
-package ro.digitalNation.fm.shopManagementProject.controllers;
+package ro.digitalNation.restuflWebService.controllers;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -8,24 +8,18 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
-import org.h2.engine.User;
-//import org.h2.engine.User;
-import ro.digitalNation.fm.shopManagementProject.beans.User;
 import ro.digitalNation.fm.shopManagementProject.beans.Person;
+import ro.digitalNation.fm.shopManagementProject.beans.User;
+import ro.digitalNation.restuflWebService.dbbeans.Material;
 
 @Controller
-public class UserJpaController implements Serializable {
+public class MaterialJpaController implements Serializable, MaterialController {
     
-    User user = new User();
+    private static final long serialVersionUID = 1L;
     
-    Person person = new Person() {
-        @Override
-        public String getResponsabilities() {
-            return null;            
-        }
-    };
+    Material material = new Material();       
     
-    public UserJpaController(EntityManagerFactory emf) {
+    public MaterialJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
@@ -35,12 +29,12 @@ public class UserJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(User user) {
+    public void create(Material material) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(user);
+            em.persist(material);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -49,25 +43,19 @@ public class UserJpaController implements Serializable {
         }
     }
     
-    /**
-     *
-     * @param user
-     * @throws controllers.exceptions.NonexistentEntityException
-     * @throws Exception
-     */
-    public void edit(User user) throws controllers.exceptions.NonexistentEntityException, Exception {
+    public void edit(Material material) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            user = em.merge(user);
+            material = em.merge(material);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = user.getId();
-                if (findUser(id) == null) {
-                    throw new NonexistentEntityException("The users with id " + " no longer exists." + id);
+                Integer id = material.getId();
+                if (findMaterial(id) == null) {
+                    
                 }
             }
             throw ex;
@@ -78,19 +66,19 @@ public class UserJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws controllers.exceptions.NonexistentEntityException {
+    public void destroy(Integer id) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            User user = null;
+            Material material = null;
             try {
-                user = em.getReference(User.class, id);
-                user.getId();
+                material = em.getReference(Material.class, id);
+                material.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new controllers.exceptions.NonexistentEntityException("The user with id " + id + " no longer exists.", enfe);
+                
             }
-            em.remove(user);
+            em.remove(material);
             em.getTransaction().commit();
  
         } finally {
@@ -100,19 +88,19 @@ public class UserJpaController implements Serializable {
         }
     }
 
-    public List<User> findUserEntities() {
-        return findUserEntities(true, -1, -1);
+    public List<Material> findMaterialEntities() {
+        return findMaterialEntities(true, -1, -1);
     }
 
-    public List<User> findUserEntities(int maxResults, int firstResult) {
-        return findUserEntities(false, maxResults, firstResult);
+    public List<Material> findMaterialEntities(int maxResults, int firstResult) {
+        return findMaterialEntities(false, maxResults, firstResult);
     }
 
-    public List<User> findUserEntities(boolean all, int maxResults, int firstResult) {
+    private List<Material> findMaterialEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(User.class));
+            cq.select(cq.from(Material.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -124,20 +112,20 @@ public class UserJpaController implements Serializable {
         }
     }
 
-    public User findUser(Integer id) {
+    public Material findMaterial(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(User.class, id);
+            return em.find(Material.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getUserCount() {
+    public int getMaterialCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<User> rt = cq.from(User.class);
+            Root<Material> rt = cq.from(Material.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

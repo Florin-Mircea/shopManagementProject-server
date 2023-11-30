@@ -10,6 +10,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,7 +21,7 @@ import java.util.HashMap;
 @NamedQueries({
     @NamedQuery(name = "courses.findAll", query = "SELECT c FROM courses c"),
     @NamedQuery(name = "courses.findById", query = "SELECT c FROM courses c WHERE c.id = :id")})
-public class Course implements Activity {
+public class Course implements Activity, Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -43,10 +44,18 @@ public class Course implements Activity {
         public String getResponsabilities() {            
             return null;            
         }
-    };          
+    };    
+
+    public Course() {
+        
+    }        
 
     public Course(Integer id) {
         this.id = id;
+    }     
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }        
     
     @Override

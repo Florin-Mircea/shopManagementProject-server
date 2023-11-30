@@ -11,6 +11,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @Bean
 @Entity
@@ -22,7 +23,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "rushes.addRush", query = "INSERT INTO `trackdb`.`rushes` (`id`, `activOne`, `activTwo`) VALUES ('', '', '')"),
     @NamedQuery(name = "rushes.updateRush", query = "UPDATE rushes SET id = `id`, activOne = `activOne`, activTwo = `activTwo` WHERE id = `id`, activOne = `activOne`, activTwo = `activTwo`"),
     @NamedQuery(name = "rushes.deleteRush", query = "DELETE FROM rushes WHERE id = `id`")})
-public class Rush implements Activity {
+public class Rush implements Activity, Serializable  {
     
     private static final long serialVersionUID = 1L;
     

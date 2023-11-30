@@ -11,11 +11,15 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 import javax.sound.midi.Track;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ro.digitalNation.fm.shopManagementProject.beans.User;
 import ro.digitalNation.fm.shopManagementProject.controllers.MainController;
 import ro.digitalNation.fm.shopManagementProject.controllers.Person;
 import ro.digitalNation.fm.shopManagementProject.controllers.UserJpaController;
+import ro.digitalNation.restuflWebService.dbbeans.Material;
+import ro.digitalNation.restuflWebService.dbbeans.Rush;
 
 //import ro.digitalNation.restuflWebService.Course;
 
@@ -33,39 +37,55 @@ public class TrackController {
     private TrainerJpaController trainerController;    
     private ExplorerJpaController explorerController;
     private RushJpaController rushController;
+    private MaterialJpaController materialController;
+
+    public TrackController(EntityManagerFactory emf, TrainerJpaController trainerController, ExplorerJpaController explorerController, RushJpaController rushController, MaterialJpaController materialController) {
+        this.emf = emf;
+        this.trainerController = trainerController;
+        this.explorerController = explorerController;
+        this.rushController = rushController;
+        this.materialController = materialController;
+    }        
     
     private TrackController() {
         emf = Persistence.createEntityManagerFactory("trackdbPU");
         trainerController = new TrainerJpaController(emf);
         explorerController = new ExplorerJpaController(emf);
         rushController = new RushJpaController(emf);
+        materialController = new MaterialJpaController(emf);
     }
     
     Trainer trainer = new Trainer();
     Explorer explorer = new Explorer();
+    Course course = new Course();
+    Track track = new Track();    
+    Rush rush = new Rush();
+    Material material = new Material();
     
     Person person = new Person() {
         @Override
         public String getResponsabilities() {
             return null;            
         }
-    };
+    };        
     
     public TrackController(EntityManagerFactory emf, TrainerJpaController trainerController) {
         this.emf = emf;
         this.trainerController = trainerController;
+        this.explorerController = explorerController;
+        this.rushController = rushController;
+        this.materialController = materialController;
     }        
     
     ArrayList<Trainer> trainers = new ArrayList<Trainer>();
+    ArrayList<Explorer> explorers = new ArrayList<Explorer>();
+    ArrayList<Rush> rushes = new ArrayList<Rush>();
+    ArrayList<Material> materials = new ArrayList<Material>();
     
     private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-    
-    //Track track = new Track();
-    Course course = new Course();    
-    Rush rush = new Rush();                   
-    
-    public Track track(@PathVariable(value = "name", defaultValue = "World") String name) {
+    private final AtomicLong counter = new AtomicLong();                                   
+            
+    public Track track(@PathVariable(value = "name", defaultValue = "World") String name, String defaultValue) {
         return new Track(counter.incrementAndGet(), String.format(template, name));
     } 
     
@@ -146,8 +166,7 @@ public class TrackController {
     
     @GetMapping("/")
     public ArrayList<Activ> getActivsCourse() {
-        return course.activs;
-        
+        return course.activs;        
     }
     
     @GetMapping("/")
@@ -162,7 +181,7 @@ public class TrackController {
     
     @PostMapping("/addTrainer")
     public void addTrainer(@ModelAttribute Trainer t, Model model) {       
-        //model.Attribute("t", t);
+        model.Attribute("t", t);
         trainerController.create(new Trainer(t.getId(), t.getFirstName(), t.getLastName(), t.getCity(), t.getAge(), t.isMarried(), t.getCost(), t.getExplorer(), t.getTrainer()));
     }
     

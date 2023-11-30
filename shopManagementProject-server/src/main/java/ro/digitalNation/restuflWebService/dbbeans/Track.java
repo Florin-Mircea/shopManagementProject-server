@@ -1,9 +1,10 @@
 package ro.digitalNation.restuflWebService.dbbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Bean
-public class Track {
+public class Track implements Serializable {
         
         private String trainer;
         private String explorer;

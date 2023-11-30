@@ -58,9 +58,20 @@ public class Invoice implements Serializable {
         this.invoiceLine = invoiceLine;
     }
 
-    Invoice(int i, String series, Integer number, Integer invoiceLine) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Invoice(Integer id, String series, Integer number, Integer invoiceLine) {
+        this.id = id;
+        this.series = series;
+        this.number = number;
+        this.invoiceLine = invoiceLine;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }        
 
     public String getSeries() {
         return series;
@@ -91,8 +102,6 @@ public class Invoice implements Serializable {
         return "Invoice{" + "series=" + series + ", number=" + number + ", invoiceLine=" + invoiceLine + '}';
     }    
 
-    void getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
 }

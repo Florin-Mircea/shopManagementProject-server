@@ -107,7 +107,7 @@ public class UserJpaController implements Serializable, UserController  {
         return findUserEntities(false, maxResults, firstResult);
     }
 
-    private List<User> findUserEntities(boolean all, int maxResults, int firstResult) {
+    public List<User> findUserEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

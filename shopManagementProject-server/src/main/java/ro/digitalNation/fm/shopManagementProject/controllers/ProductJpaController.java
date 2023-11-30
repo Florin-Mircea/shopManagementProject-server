@@ -37,6 +37,29 @@ public class ProductJpaController implements Serializable {
         }
     }
     
+    public void edit(Product product) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            product = em.merge(product);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = product.getId();
+                if (findProduct(id) == null) {
+                    
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
     public void destroy(Integer id) {
         EntityManager em = null;
         try {
@@ -47,7 +70,7 @@ public class ProductJpaController implements Serializable {
                 product = em.getReference(Product.class, id);
                 product.getId();
             } catch (EntityNotFoundException enfe) {
-                
+                System.out.println("Exception");
             }
             em.remove(product);
             em.getTransaction().commit();
@@ -108,10 +131,5 @@ public class ProductJpaController implements Serializable {
     List<Product> findProductEntities() {
         return null;        
     }
-
-    /*
-    private Object findProduct(Integer id) {
-        return null;        
-    }
-    */
+    
 }

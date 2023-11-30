@@ -1,11 +1,23 @@
 package ro.digitalNation.restuflWebService.controllers;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import ro.digitalNation.restuflWebService.dbbeans.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 @Bean
-public class Course implements Activity {
+@Entity
+@Table(name = "courses", catalog = "trackdb", schema = "")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "courses.findAll", query = "SELECT c FROM courses c"),
+    @NamedQuery(name = "courses.findById", query = "SELECT c FROM courses c WHERE c.id = :id")})
+public class Course implements Activity, Serializable {
     
     Explorer explorer = new Explorer();
     Trainer trainer = new Trainer();

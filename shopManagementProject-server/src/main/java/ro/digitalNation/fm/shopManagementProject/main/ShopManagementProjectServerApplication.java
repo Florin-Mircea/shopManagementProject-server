@@ -1,17 +1,25 @@
 package ro.digitalNation.fm.shopManagementProject.main;
 
 import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.security.auth.Subject;
 import static oracle.net.aso.b.i;
+import static oracle.sql.NUMBER.e;
 import org.apache.catalina.User;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestParam;
+import ro.digitalNation.fm.shopManagementProject.beans.Client;
+import ro.digitalNation.fm.shopManagementProject.beans.InvoiceLine;
 import ro.digitalNation.fm.shopManagementProject.controllers.Invoice;
 import ro.digitalNation.fm.shopManagementProject.controllers.MainController;
 import ro.digitalNation.fm.shopManagementProject.controllers.Product;
+import ro.digitalNation.restuflWebService.controllers.Course;
+import ro.digitalNation.restuflWebService.controllers.Explorer;
+import ro.digitalNation.restuflWebService.controllers.TrackController;
+import ro.digitalNation.restuflWebService.controllers.Trainer;
 import ro.digitalNation.restuflWebService.dbbeans.Person;
 
 //@SPRING_BOOT_APPLICATION
@@ -53,6 +61,7 @@ public class ShopManagementProjectServerApplication {
                 */
                 
             MainController mainController = new MainController();
+            TrackController trackController = new TrackController();
             
             User u = new User() {
                     @Override
@@ -73,7 +82,13 @@ public class ShopManagementProjectServerApplication {
                     }
                 };
             Product p = new Product();
+            Client c = new Client();
             Invoice i = new Invoice();
+            InvoiceLine il = new InvoiceLine();
+            
+            Trainer t = new Trainer();
+            Explorer e = new Explorer();
+            Course course = new Course();
             
             mainController.getUsers(args);
             mainController.addUser((ro.digitalNation.fm.shopManagementProject.beans.User) u);
@@ -85,6 +100,22 @@ public class ShopManagementProjectServerApplication {
             mainController.addProduct(p);            
             mainController.getInvoices(args);
             mainController.addInvoice(i);
+            
+            trackController.getTrainers(pers);
+            trackController.addTrainer(t, model);
+            trackController.getExplorers(pers);
+            trackController.addExplorer(e, model);
+            trackController.getCourses();
+            trackController.getActivsCourse();
+            trackController.getCourseActivities();
+            trackController.getTrackCourseTrainer();
+            trackController.getTrackCourseExplorers();
+            trackController.getCourseOne();
+            trackController.getCourseTwo();
+            trackController.getCourseThree();
+            trackController.getCourseFour();
+            trackController.getCourseFive();
+            trackController.getTrackCourses();            
             
             } catch(Exception ex) {
                 System.out.println("Exception");

@@ -11,6 +11,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @Bean
 @Entity
@@ -22,7 +23,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "explorers.addExplorer", query = "INSERT INTO `trackdb`.`explorers` (`id`, `explorer`) VALUES ('', '')"),
     @NamedQuery(name = "trainers.updateExplorer", query = "UPDATE explorers SET id = `id`, explorer = `explorer` WHERE id = `id`, explorer = `explorer`"),
     @NamedQuery(name = "invoices.deleteExplorer", query = "DELETE FROM explorers WHERE id = `id`")})
-public class Explorer extends Person {
+public class Explorer extends Person implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
